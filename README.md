@@ -1,11 +1,13 @@
 # About
 Extension ScratchEco<br/>
 This extension expands the functionality of the site.
+# Follow on twitter
+https://twitter.com/EcoScratch
 # Install
 You need to download [Tampermonkey](https://tampermonkey.net/) to install this user script<br/>
 It user script cross-browser<br/>
 [Install](https://github.com/SimaKyr/scratchEco/raw/master/scratchEco.user.js)
-# Example
+# What you can?
 Now you can add images on you messeges<br/>
 ![Example1](https://github.com/SimaKyr/scratchEco/blob/master/screnshots/2.png?raw=true)<br/>
 change quick change trumbnail on project<br/>
