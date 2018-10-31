@@ -1,11 +1,10 @@
 
-    var temp = document.createElement("script");
+var temp = document.createElement("script");
 temp.src = "https://www.gstatic.com/firebasejs/5.5.3/firebase.js";
 temp.onload = function(){connect();};
 document.getElementsByTagName('head')[0].appendChild(temp);
 function connect(){
-    var tempa = document.createElement('script');
-var scriptct=`var config = {
+var config = {
     apiKey: "hide",
     authDomain: "hide",
     databaseURL: "hide",
@@ -16,10 +15,8 @@ var scriptct=`var config = {
   firebase.initializeApp(config);
   function set(key,value){firebase.database().ref().child(key).set(value);}
   firebase.database().ref().on('value', snap => get = snap.val());
-`
-tempa.innerHTML = scriptct;
-document.body.appendChild(tempa);
 }
+
 document.head.appendChild(temp);
 
 window.onload = function() {
