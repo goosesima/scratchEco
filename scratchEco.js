@@ -62,6 +62,57 @@ var m=m.replace('[img]','').replace('[/img]','').replace(text,'');
 i++;
 }return text;}
 
+function getOffset(el) {
+  const rect = el.getBoundingClientRect();
+  return {
+    left: rect.left + window.scrollX,
+    top: rect.top + window.scrollY
+  };
+}
+
+function isElementToProfile(el){
+return el.href.split("/").slice(3)[0]=='users';
+}
+
+function infoFrameCreate(){
+var ifr = document.createElement('iframe');
+ifr.height = '250px';
+ifr.width = '140px';
+ifr.id = 'infoFrame';
+ifr.style.border = "none";
+ifr.style = "position:absolute; z-index: 5000;"
+document.body.appendChild(ifr);
+}
+
+function setCordInfoFrame(elem){
+document.getElementById("infoFrame").style.left = getOffset(elem).left + 'px';
+document.getElementById("infoFrame").style.top = getOffset(elem).top + 'px';
+}
+
+function getNicknameElementA(elm){
+return elm.href.split("/").slice(3)[1];
+}
+function injectAElements(){
+var elm = document.getElementsByTagName('a');
+var i = 0;
+while(elm.length!=i){
+if(isElementToProfile(elm[i])){
+elm[i].onmouseover = function(){
+var ifr = document.getElementById("infoFrame");
+ifr.src = 'https://simakyr.github.io/scratch-profile-embed/#' + getNicknameElementA(elm[i]);
+setCordInfoFrame(elm[i]);
+ifr.style.display = 'block';
+ifr.style.visibility = 'visible';
+}
+elm[i].onmouseout = function(){
+var ifr = document.getElementById("infoFrame");
+ifr.style.display = 'none';
+ifr.style.visibility = 'hidden';
+}
+
+}
+i++;
+}}
 
 //сканирует все сообщения и переводит их в нормальные
 function makeReadable(){
