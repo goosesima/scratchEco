@@ -280,6 +280,7 @@ document.getElementsByClassName('control-group')[1].innerHTML = document.getElem
 }
 //отправка для кнопки
 function sendCustom(){
+function set(key,value){firebase.database().ref().child(key).set(value);}
 set('mL',get['mL']+1);
 set('m'+ get['mL'],getText());
 sendMessege('☁'+ get['mL'] +'☁');
