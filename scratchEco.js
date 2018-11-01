@@ -123,6 +123,7 @@ para.innerHTML = html;
 document.getElementById('stats').appendChild(para);
 var val = localStorage.getItem('playerScratch');    
 document.querySelector('#selectorPlayer [value="' + val + '"]').selected = true;
+changePlayer();
 document.getElementById('selectorPlayer').onchange = function () {
 var player = document.getElementById('selectorPlayer').selectedIndex;
 localStorage.setItem('playerScratch', player);
