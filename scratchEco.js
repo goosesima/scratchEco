@@ -67,7 +67,7 @@ function getOffset(el) {
 }
 
 function isElementToProfile(el){
-return el.href.split("/").slice(3)[0]=='users';
+return el.href.split("/").slice(3)[1] == el.innerText;
 }
 
 function infoFrameCreate(){
@@ -134,8 +134,8 @@ if(player!=0){
 }}
 
 function getNicknameElementA(elm){
-return elm.href.split("/").slice(3)[1];
-}
+return elm.innerText;
+
 function injectAElements(){
 var elm = document.getElementsByTagName('a');
 var i = 0;
