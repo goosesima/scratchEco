@@ -1,6 +1,5 @@
 # About
-Extension ScratchEco<br/>
-This extension expands the functionality of the site.
+ScratchEco is an open source project to skill up your Scratch website experience! \nWith ScratchEco extension you can Set GIF thumbnails to project,  Send images in comments, watch user statistics and much more!
 # Follow on twitter
 https://twitter.com/EcoScratch
 # Install
