@@ -85,6 +85,7 @@ function setCordInfoFrame(elem){
 document.getElementById("infoFrame").style.left = getOffset(elem).left + 'px';
 document.getElementById("infoFrame").style.top = getOffset(elem).top + 'px';
 }
+
 function changePlayer(){
 
 if('null' == localStorage.getItem('playerScratch')){
@@ -116,6 +117,7 @@ var num = parseInt(window.location.href.split('#')[0].replace(/\D+/g,""));
     document.getElementById(eleme).innerHTML = html;
     document.getElementById(eleme).style = '';
 }}
+
 function addChangerPlayer(){
 var html = '<select id="selectorPlayer" style="width:100px;"><option value="0">Original</option><option value="1">Phosphorus</option><option value="2">Surforus</option></select>';
 var para = document.createElement('div')
