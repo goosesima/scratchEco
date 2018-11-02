@@ -322,7 +322,7 @@ if(getCredit()==getNickname()){addBtnGif();}}
 //добавляет кнопку об комментах
 function addBtnhelp(){
     if(document.getElementsByClassName('btnaboutm')[0]==undefined){
-var a = ` + iS + injectAbout + iS + `;
+var a = injectAbout;
 document.getElementsByClassName('control-group')[1].innerHTML = document.getElementsByClassName('control-group')[1].innerHTML + a;
     }
 }
@@ -349,6 +349,9 @@ if(url.includes('users')){addBtnAbout();}
 
 }
 function fixes(){
+if(typeof get == 'undefined'||typeof set == 'undefined'){
+fireHere();
+}
     if(url.includes('users') || url.includes('projects') || url.includes('comments')){
 makeReadable();
 tagsScan();
