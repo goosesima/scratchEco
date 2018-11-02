@@ -18,7 +18,6 @@ document.head.appendChild(temp);
 
 window.onload = function() {
     
-var script = document.createElement("script");
 var iS = "`";
 var injectAbout = `<div class='btnaboutm'><img src='https://simakyr.github.io/scratchEco/icons/about.png' height='16px'><div><h5>Help</h5><p>You can use for inject image [img]url to image[/img]</p></div></div>
 <style>.btnaboutm{
@@ -373,6 +372,5 @@ if(document.getElementById('selectorPlayer')==null){addChangerPlayer();}
 }
 `;
 
-script.innerHTML = scriptc;
-document.head.appendChild(script);
+Function(scriptc)();
 }
