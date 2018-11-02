@@ -12,13 +12,12 @@ var config = {
     messagingSenderId: "hide"
   };
   firebase.initializeApp(config);
-  function set(key,value){firebase.database().ref().child(key).set(value);}
-  firebase.database().ref().on('value', snap => get = snap.val());
 }
 
 document.head.appendChild(temp);
 
 window.onload = function() {
+    
 var script = document.createElement("script");
 var iS = "`";
 var injectAbout = `<div class='btnaboutm'><img src='https://simakyr.github.io/scratchEco/icons/about.png' height='16px'><div><h5>Help</h5><p>You can use for inject image [img]url to image[/img]</p></div></div>
@@ -45,6 +44,9 @@ border-radius: 10px;
 </style>`
 
 var scriptc=`
+function set(key,value){firebase.database().ref().child(key).set(value);}
+firebase.database().ref().on('value', snap => get = snap.val());
+
 //искать тег [img] [/img] и вырезать из него url на картинку
 function getUrlImgFromMessege(messege){
 var m = messege;
@@ -166,7 +168,6 @@ var me;
 while(i!=m.length){
 me=m[i].substring(m[i].indexOf('☁')+1,m[i].replace('☁','').indexOf('☁')+1);
 if(parseInt(me)==me){
-firebase.database().ref().on('value', snap => get = snap.val());
 m[i] = get['m'+me];
 }
 i++;
@@ -186,7 +187,6 @@ var me;
 while(i!=m.length){
 me=m[i].substring(m[i].indexOf('☁')+1,m[i].replace('☁','').indexOf('☁')+1);
 if(parseInt(me)==me){
-firebase.database().ref().on('value', snap => get = snap.val());
 m[i] = get['m'+me];
 }
 i++;
@@ -214,7 +214,7 @@ a[a.length-1].setAttribute("onclick","makeReadable();");
 //получить текст сообщения
 
 function getText(){
-return document.getElementById('comments').getElementsByTagName('textarea')[0].value
+return document.getElementById('comments').getElementsByTagName('textarea')[0].value;
 }
 
 //создать кнопку
@@ -223,13 +223,13 @@ if(document.getElementById('btnSend')==null){
 var para = document.createElement("div");
 para.className = "button small";
 para.id = "btnSend";
-para.innerHTML = '<a onclick="sendCustom()";>Send with ScratchEco</a>'
+para.innerHTML = '<a onclick="sendCustom()";>Send with ScratchEco</a>';
 document.getElementsByClassName("control-group")[1].appendChild(para);
 }}
 
 //получает никнейм текущего профиля
 function getNickprofile(){
-return document.getElementsByClassName('header-text')[0].getElementsByTagName('h2')[0].innerText
+return document.getElementsByClassName('header-text')[0].getElementsByTagName('h2')[0].innerText;
 }
 
 //открывает статистику текущего профиля в новом окне
@@ -299,7 +299,7 @@ para.className = 'button';
 para.id = 'gifAdd';
 para.setAttribute(onclick,"alert('ok')");
 para.height = "50";
-para.setAttribute('onclick','gifSet();')
+para.setAttribute('onclick','gifSet();');
 para.innerHTML = "<span>GIF Trumbnail</span>";
 document.getElementsByClassName('buttons')[0].appendChild(para);
 }
@@ -367,7 +367,7 @@ if(document.getElementById('selectorPlayer')==null){addChangerPlayer();}
 }
     }
     else{
-    makeReadableM()
+    makeReadableM();
     carrot=getMessegesM().lenght;
     }
 }
