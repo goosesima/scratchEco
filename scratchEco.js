@@ -72,17 +72,17 @@ return el.href.split("/").slice(3)[1] == el.innerText;
 
 function infoFrameCreate(){
 var ifr = document.createElement('iframe');
-ifr.height = '250px';
-ifr.width = '140px';
+ifr.height = '310px';
+ifr.width = '190px';
 ifr.id = 'infoFrame';
 ifr.style.border = "none";
-ifr.style = "position:absolute; z-index: 5000;"
+ifr.style = "position:absolute; z-index: 5000;overflow:hidden;overflow-y:hidden;overflow-x:hidden;border: 0;border-radius: 50px;";
 document.body.appendChild(ifr);
 }
 
 function setCordInfoFrame(elem){
-document.getElementById("infoFrame").style.left = getOffset(elem).left + 'px';
-document.getElementById("infoFrame").style.top = getOffset(elem).top + 'px';
+document.getElementById("infoFrame").style.left = getOffset(elem).left+10 + 'px';
+document.getElementById("infoFrame").style.top = getOffset(elem).top+20 + 'px';
 }
 
 function changePlayer(){
@@ -137,27 +137,27 @@ function getNicknameElementA(elm){
 return elm.innerText;
 }
 
-function injectAElements(){
-var elm = document.getElementsByTagName('a');
-var i = 0;
-while(elm.length!=i){
-if(isElementToProfile(elm[i])){
-elm[i].onmouseover = function(){
-var ifr = document.getElementById("infoFrame");
-ifr.src = 'https://simakyr.github.io/scratch-profile-embed/#' + getNicknameElementA(elm[i]);
-setCordInfoFrame(elm[i]);
-ifr.style.display = 'block';
-ifr.style.visibility = 'visible';
-}
-elm[i].onmouseout = function(){
-var ifr = document.getElementById("infoFrame");
-ifr.style.display = 'none';
-ifr.style.visibility = 'hidden';
-}
-
-}
-i++;
+function injectA(e){
+    e.onmouseover = function() {
+        var ifr = document.getElementById("infoFrame");
+        ifr.src = 'https://simakyr.github.io/scratch-profile-embed/#' + e.innerText;
+        setCordInfoFrame(e);
+        ifr.style.display = 'block';
+        ifr.style.visibility = 'visible';
+    }
+	e.onmouseout = function() {
+		var ifr = document.getElementById("infoFrame");
+        ifr.style.display = 'none';
+        ifr.style.visibility = 'hidden';
 }}
+
+function injectAElements(){
+var elements = document.getElementsByTagName('a');
+for(var i = 0, len = elements.length; i < len; i++) {
+if(isElementToProfile(elements[i])){
+injectA(elements[i]);
+}}}
+
 
 //сканирует все сообщения и переводит их в нормальные
 function makeReadable(){
@@ -354,6 +354,8 @@ makeReadable();
 tagsScan();
 createBtn();
 addBtnhelp();
+infoFrameCreate();
+injectAElements();
 carrot=getMesseges().lenght;
 if(url.includes('projects')){
 addGif();
