@@ -1,7 +1,7 @@
 
 var temp = document.createElement("script");
 temp.src = "https://www.gstatic.com/firebasejs/5.5.3/firebase.js";
-document.getElementsByTagName('head')[0].appendChild(temp);
+temp.onload = function(){ connect(); }
 function connect(){
 var config = {
     apiKey: "hide",
@@ -349,8 +349,8 @@ if(url.includes('users')){addBtnAbout();}
 
 }
 function fixes(){
-if(typeof get == 'undefined'||typeof set == 'undefined'){
-fireHere();
+if(!firebase.apps.length){
+connect();
 }
     if(url.includes('users') || url.includes('projects') || url.includes('comments')){
 makeReadable();
