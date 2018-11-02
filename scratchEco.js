@@ -349,9 +349,6 @@ if(url.includes('users')){addBtnAbout();}
 
 }
 function fixes(){
-if(!firebase.apps.length){
-connect();
-}
     if(url.includes('users') || url.includes('projects') || url.includes('comments')){
 makeReadable();
 tagsScan();
