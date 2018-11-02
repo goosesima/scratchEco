@@ -12,13 +12,11 @@ var config = {
     messagingSenderId: "hide"
   };
   firebase.initializeApp(config);
+  fireHere();
 }
 
 document.head.appendChild(temp);
 
-window.onload = function() {
-    
-var iS = "`";
 var injectAbout = `<div class='btnaboutm'><img src='https://simakyr.github.io/scratchEco/icons/about.png' height='16px'><div><h5>Help</h5><p>You can use for inject image [img]url to image[/img]</p></div></div>
 <style>.btnaboutm{
 height:16px;
@@ -42,9 +40,10 @@ border-radius: 10px;
 }
 </style>`
 
-var scriptc=`
+function fireHere(){
 function set(key,value){firebase.database().ref().child(key).set(value);}
 firebase.database().ref().on('value', snap => get = snap.val());
+}
 
 //искать тег [img] [/img] и вырезать из него url на картинку
 function getUrlImgFromMessege(messege){
@@ -136,6 +135,7 @@ if(player!=0){
 
 function getNicknameElementA(elm){
 return elm.innerText;
+}
 
 function injectAElements(){
 var elm = document.getElementsByTagName('a');
@@ -175,7 +175,7 @@ setMesseges(m);
 }
 
 function addBtnAbout(){
-var html = '<img onclick="openStats()" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAFiQAABYkBbWid+gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGjSURBVEiJ3dW/S5VRGAfwj17vVKQ0hcO17tAvClIbm3SKBgf/gDBwkCZrKReJIgLdnMNosKChKYQgaMnAoZZIyqVAGposbmWh3oZzLvfel/ftvtp18QuHc97z/Pie9z3f53nZYxRa2Iso42j0/d4u4uN4iHVUG8Yn3Eb3/yQfx28s4wpO4ggGcBNfsIbzu0k+hi1cR0eGz0E8wTec3knyEn7hRg7fAp7jDTrzEszhneaLL+IZXuFwwr+MPxjJS7CGa4m9HlSwiVMpMYt4kCd5t6CSCym2Ek5kxN0SxJCJrjgfiPOPhP199PmJcynxFeHSM1G7oK/CZygl7GcFpRzKiC8Jsm1JsIklXErYt6ItK/YiXv6LoBGXBZkea9ibxIxQ0TPoS/hvCG0kFwp4LWi7J+4NY7Rh1KTaL/SlO3mT19CLVXzAUIq9CxPx5BsY3CmBeMrH2MYK7mMWjwQxVOJ6Oz6n1UcunME0nuIFFnBVaHziuioUaHm3JK0wFUk+axZAW3E3knxUf7u2Yy6SvFVXYFvRgflIcm8vCAh1NCH8bvcR/gLcbFO0Hvor8QAAAABJRU5ErkJggg==">';
+var html = '<img onclick="openStats()" src="https://raw.githubusercontent.com/SimaKyr/scratchEco/master/icons/aboutUser.png">';
 document.getElementsByClassName('header-text')[0].getElementsByTagName('h2')[0].innerHTML = a=document.getElementsByClassName('header-text')[0].getElementsByTagName('h2')[0].innerHTML+ html;
 }
 
@@ -333,7 +333,6 @@ set('mL',get['mL']+1);
 set('m'+ get['mL'],getText());
 sendMessege('☁'+ get['mL'] +'☁');
 }
-runM();
 function runM(){
 url = document.location.href.split("/").slice(3);
 if(url.includes('users') || url.includes('projects') || url.includes('comments')){
@@ -349,8 +348,6 @@ addChangerPlayer();
 if(url.includes('users')){addBtnAbout();}
 
 }
-carrot=0;
-setInterval(fixes,1000);
 function fixes(){
     if(url.includes('users') || url.includes('projects') || url.includes('comments')){
 makeReadable();
@@ -370,7 +367,4 @@ if(document.getElementById('selectorPlayer')==null){addChangerPlayer();}
     carrot=getMessegesM().lenght;
     }
 }
-`;
-
-Function(scriptc)();
-}
+window.onload = function() { carrot=0;runM();setInterval(fixes,1000); }
