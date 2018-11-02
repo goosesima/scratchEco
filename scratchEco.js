@@ -166,6 +166,7 @@ var me;
 while(i!=m.length){
 me=m[i].substring(m[i].indexOf('☁')+1,m[i].replace('☁','').indexOf('☁')+1);
 if(parseInt(me)==me){
+firebase.database().ref().on('value', snap => get = snap.val());
 m[i] = get['m'+me];
 }
 i++;
@@ -185,6 +186,7 @@ var me;
 while(i!=m.length){
 me=m[i].substring(m[i].indexOf('☁')+1,m[i].replace('☁','').indexOf('☁')+1);
 if(parseInt(me)==me){
+firebase.database().ref().on('value', snap => get = snap.val());
 m[i] = get['m'+me];
 }
 i++;
