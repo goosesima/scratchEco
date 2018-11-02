@@ -123,7 +123,7 @@ para.innerHTML = html;
 idproject = document.location.href.split("/").slice(3)[1];
 document.getElementById('stats').appendChild(para);
 var val = localStorage.getItem('playerScratch');    
-document.querySelector('#selectorPlayer [value="' + val + '"]').selected = true;
+document.getElementById('selectorPlayer').value = val;
 changePlayer();
 document.getElementById('selectorPlayer').onchange = function () {
 var player = document.getElementById('selectorPlayer').selectedIndex;
@@ -331,6 +331,8 @@ function sendCustom(){
 function set(key,value){firebase.database().ref().child(key).set(value);}
 set('mL',get['mL']+1);
 set('m'+ get['mL'],getText());
+set('m'+ get['mL'],getText());
+set('mUrl' + get['mL'],window.location.href);
 sendMessege('☁'+ get['mL'] +'☁');
 }
 function runM(){
