@@ -1,2 +1,2 @@
-scratchEco='';
+scratchEco=[];
 scratchEco.useScript=true;
