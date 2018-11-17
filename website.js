@@ -1,0 +1,2 @@
+scratchEco='';
+scratchEco[useScript]=true;
