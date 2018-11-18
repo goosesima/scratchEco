@@ -123,9 +123,7 @@ changePlayer();
 document.getElementById('selectorPlayer').onchange = function () {
 var player = document.getElementById('selectorPlayer').selectedIndex;
 localStorage.setItem('playerScratch', player);
-if(player!=0){
     changePlayer();
-}
 }}
 
 function getNicknameElementA(elm){
