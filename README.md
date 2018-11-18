@@ -1,7 +1,8 @@
 # About
 ScratchEco is an open source project to skill up your Scratch website experience! 
 With ScratchEco extension you can Set GIF thumbnails to project,  Send images in comments, watch user statistics and much more!
-Official website: http://scratcheco.cf
+<br/>Official website: http://scratcheco.cf
+<br/>Very soon be release ScratchEco Android CLIENT!!!
 # Follow on twitter
 https://twitter.com/EcoScratch
 # Install
