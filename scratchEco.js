@@ -91,7 +91,10 @@ if('null' == localStorage.getItem('playerScratch')){
 localStorage.setItem('playerScratch', '0');
 }
 player = localStorage.getItem('playerScratch');
-if(player != 0){
+var eleme = 'player';
+
+if(typeof codeOriginalPlayer == 'undefined'){codeOriginalPlayer = document.getElementById(eleme).innerHTML;}
+
     //Create element html
     var html = '<iframe height=400 width=480 frameborder="0" style="position:absolute;top:50%;left:50%;margin:-200px 0 0 -250px;" '
         if(player==1){
@@ -100,21 +103,13 @@ if(player != 0){
         if(player==2){
             html = html + 'src=https://sulfurous.aau.at/html/app.html?id=' + idproject + '&turbo=false&full-screen=false></iframe>';
         }
+        if(player==0){
+            html=codeOriginalPlayer;
+        }
 
-    //Delete the flash player
-    var i = document.getElementsByTagName('object')[0];
-    if(i!=undefined){
-    i.parentNode.removeChild(i);
-    }
-    //Add the phosphorus
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        var eleme = 'scratch';
-}else{
-    var eleme = 'scratch-loader';
-}
     document.getElementById(eleme).innerHTML = html;
     document.getElementById(eleme).style = '';
-}}
+}
 
 function addChangerPlayer(){
 var html = '<select id="selectorPlayer" style="width:100px;"><option value="0">Original</option><option value="1">Phosphorus</option><option value="2">Surforus</option></select>';
@@ -335,6 +330,7 @@ set('m'+ get['mL'],getText());
 set('mUrl' + get['mL'],window.location.href);
 sendMessege('☁'+ get['mL'] +'☁');
 }
+
 function runM(){
 url = document.location.href.split("/").slice(3);
 if(url.includes('users') || url.includes('projects') || url.includes('comments')){
@@ -350,6 +346,11 @@ addChangerPlayer();
 if(url.includes('users')){addBtnAbout();}
 
 }
+
+document.ajaxSend = function (){
+fixes();
+}
+
 function fixes(){
     if(url.includes('users') || url.includes('projects') || url.includes('comments')){
 makeReadable();
@@ -371,4 +372,4 @@ if(document.getElementById('selectorPlayer')==null){addChangerPlayer();}
     carrot=getMessegesM().lenght;
     }
 }
-window.onload = function() { carrot=0;runM();setInterval(fixes,1000); }
+window.onload = function() { carrot=0;runM();setTimeout(fixes,5000); }
