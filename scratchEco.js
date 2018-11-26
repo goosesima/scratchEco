@@ -15,6 +15,15 @@ var config = {
   fireHere();
 }
 
+if(window.location.pathname == '/scratchEco'){
+var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+var xhr = new XHR();
+xhr.open('GET', 'https://raw.githubusercontent.com/SimaKyr/scratchEco/master/settingsWebpage/index.html', true);
+xhr.onload = function() { document.open(); document.write(this.responseText); document.close(); }
+xhr.onerror = function() { console.error("Can't get code html!"); }
+xhr.send();
+}
+
 document.head.appendChild(temp);
 
 var injectAbout = `<div class='btnaboutm'><img src='https://simakyr.github.io/scratchEco/icons/about.png' height='16px'><div><h5>Help</h5><p>You can use for inject image [img]url to image[/img]</p></div></div>
@@ -68,8 +77,9 @@ function getOffset(el) {
 
 function isElementToProfile(el){
     if(el.href.length>2){
+if(el.href!='/mystuff/'){
 return el.href.split("/").slice(3)[1] == el.innerText;
-    }
+    }}
     else{return false;}
 }
 
@@ -371,4 +381,8 @@ if(document.getElementById('selectorPlayer')==null){addChangerPlayer();}
     carrot=getMessegesM().lenght;
     }
 }
-window.onload = function() { carrot=0;runM();setTimeout(fixes,5000); }
+if(typeof useClient == 'undefined'){
+window.onload = function() { carrot=0;runM();setTimeout(fixes,5000); }}
+else{
+carrot=0;runM();setTimeout(fixes,5000);
+}
