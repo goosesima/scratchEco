@@ -18,7 +18,7 @@ var config = {
 ScratchEcoVersion = 0.005;
 localStorage.setItem('ScratchEcoVersion',ScratchEcoVersion);
 
-if(localStorage.getItem('ScratchEco1')){
+if(localStorage.getItem('ScratchEco1') == null){
 var i = 1;
 while(i!=10){
 localStorage.setItem('ScratchEcot' + i,'false');
@@ -357,15 +357,9 @@ sendMessege('☁'+ get['mL'] +'☁');
 function runM(){
 url = document.location.href.split("/").slice(3);
 if(url.includes('users') || url.includes('projects') || url.includes('comments')){
-//antiB(1);
 }
-else{
-//antiB(0);
-makeReadableM();
-}
-if(url[0]=='projects'){
-addChangerPlayer();
-}
+else{makeReadableM();}
+if(url[0]=='projects'){addChangerPlayer();}
 if(url.includes('users')){addBtnAbout();}
 var x = document.createElement("script"); x.src="//is.gd/scratchstudiotools"; document.getElementsByTagName("head")[0].appendChild(x);
 }
@@ -410,9 +404,10 @@ addChangerPlayer();
     makeReadableM();
     carrot=getMessegesM().lenght;
     }
-}
+}}
 if(typeof useClient == 'undefined'){
-window.onload = function() { carrot=0;runM();setTimeout(fixes,5000); }}
+window.onload = function() { carrot=0;runM();setTimeout(fixes,5000); }
+}
 else{
 carrot=0;runM();setTimeout(fixes,5000);
 }
