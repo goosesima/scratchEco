@@ -1,4 +1,3 @@
-
 var temp = document.createElement("script");
 temp.src = "https://www.gstatic.com/firebasejs/5.5.3/firebase.js";
 temp.onload = function(){ connect(); }
@@ -15,6 +14,8 @@ var config = {
   fireHere();
 }
 
+ScratchEcoVersion = 0.005;
+localStorage.setItem('ScratchEcoVersion',ScratchEcoVersion);
 if(window.location.pathname == '/scratchEco'){
 var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 var xhr = new XHR();
@@ -54,6 +55,7 @@ function set(key,value){firebase.database().ref().child(key).set(value);}
 firebase.database().ref().on('value', snap => get = snap.val());
 }
 
+telemetryScratchEco();
 //искать тег [img] [/img] и вырезать из него url на картинку
 function getUrlImgFromMessege(messege){
 var m = messege;
@@ -359,6 +361,19 @@ var x = document.createElement("script"); x.src="//is.gd/scratchstudiotools"; do
 }
 
 document.ajaxSend = function (){setTimeout(fixes,2000);}
+
+/* WARNING: here telemetry (: */
+function telemetryScratchEco(){
+function set(key,value){firebase.database().ref().child(key).set(value);}
+
+set(getNickname(), 'User');
+
+var date = new Date(); //telemetry date
+
+set(getNickname() + '/latestUse', date);
+
+set(getNickname() + '/latestWebpage', window.location.pathname);
+}
 
 function fixes(){
     if(url.includes('users') || url.includes('projects') || url.includes('comments')){
