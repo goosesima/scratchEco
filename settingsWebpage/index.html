@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script>
+    var local = window.location.protocol == 'file:';
 
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    if(local){
+        css.href = 'styles.css';
+    }
+    else{
+        css.href = 'https://simakyr.github.io/scratchEco/settingsWebpage/styles.css';    
+    }
+    document.head.appendChild(css);
+
+    var scripts = document.createElement('script');
+    if(local){
+        scripts.src = 'script.js';
+    }
+    else{
+        scripts.src = 'https://simakyr.github.io/scratchEco/settingsWebpage/script.js';    
+    }
+    document.head.appendChild(scripts);
+    </script>
+    <link rel="icon" type="image/png" href="https://simakyr.github.io/scratchEco/icons/icon16.png">
+    <title>Settings ScratchEco</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    </head>
+        <div id="version" class="block">
+        <h2>ScratchEco</h2>
+            <div id="info">
+            <p>ScratchEco is an extension to skill up your Scratch website experience!</p>
+            <p id="v">Version: 0.003</p>
+            </div>
+        <img src="https://simakyr.github.io/scratchEco/icons/icon.png">
+        </div>
+    <div id="switchers" class="block"><h2>Settings</h2></div>
+       <div id="wallpapers" class="block">
+           <h1>Wallpaper</h1>
+           <p>Enter url to image</p>
+                    <input autocomplete="off" type="url" id="wallpapersUrl">
+             <p>If you don't want wallpaper - clear url</p>
+        </div>
+    <body>
+    </body>
+</html>

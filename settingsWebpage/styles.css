@@ -1,0 +1,77 @@
+#info{
+float: right;
+padding: 20px;
+}
+
+input{ outline: none; }
+
+#wallpapers{ padding: 25px; }
+
+#wallpapersUrl{
+height: 25px;
+width: 100%;
+border: none;
+border-radius: 10px;
+}
+
+.block{
+background:#6abf69;
+border-radius: 20px;
+margin:50px;
+}
+
+#version{
+padding:25px;
+box-shadow: 0 0 1px rgba(0,0,0,0.5);
+}
+
+#switchers{
+padding: 25px;
+display: table;
+box-shadow: 0 0 1px rgba(0,0,0,0.5);
+}
+
+h2, h1,p { color: white; font-family: 'Roboto', sans-serif; }
+
+body{ 
+    margin: auto;
+    display: table;
+}
+.switcher{ display: flex; }
+
+.switcher h1{
+    font-size: 20px;
+    margin: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+.switcher .facecheckbox{ margin: 10px; }
+
+.facecheckbox{
+background: #009688;
+height: 30px;
+width: 30px;
+display: block;
+border-radius: 5px;
+box-shadow: 0 0 1px rgba(0,0,0,0.5);
+background-image: url(img/checkbox.png);
+background-size: 25px;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+input[type=checkbox]{
+height: 30px;
+width: 30px;
+margin: 0;
+opacity:0;
+}
+
+.facecheckboxtrue{
+height: 24px;
+width: 24px;
+border: solid;
+border-width: 3px;
+background: none;
+border-color: #737373;
+background-image: none;
+}
