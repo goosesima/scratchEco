@@ -3,14 +3,14 @@ var input = elem.getElementsByTagName('input')[0];
 input.onchange = function() {elem.className = 'facecheckbox facecheckbox' + input.checked;localStorage.setItem('ScratchEco' + input.parentElement.id, !input.checked);}
 }
 window.onload = function(){
-addCheckbox('Disable private messages','t1');
-addCheckbox('Remove windows quick information about the user','t2');
-addCheckbox('Disable ScratchEco comments','t3');
-addCheckbox('Disable pictures in commanders','t4');
-addCheckbox('Disable gif avatars','t5');
-addCheckbox('Disable curator extension for studio','t6');
-addCheckbox('Disable toggle player','t7');
-addCheckbox('Disable thumbnail gif button','t8');
+addCheckbox('Enable private messages','t1');
+addCheckbox('Enable windows quick information about the user','t2');
+addCheckbox('Enable ScratchEco comments','t3');
+addCheckbox('Enable pictures in commanders','t4');
+addCheckbox('Enable gif avatars','t5');
+addCheckbox('Enable curator extension for studio','t6');
+addCheckbox('Enable toggle player','t7');
+addCheckbox('Enable thumbnail gif button','t8');
 addCheckbox('Telemetry ScratchEco','t9');
 document.getElementById('v').innerText = 'Version: '+localStorage.getItem('ScratchEcoVersion');
 var wU = document.getElementById('wallpapersUrl');
