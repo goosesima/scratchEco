@@ -15,7 +15,7 @@ var config = {
   firebase.database.enableLogging(true);
 }
 
-ScratchEcoVersion = 0.005;
+ScratchEcoVersion = 0.006;
 localStorage.setItem('ScratchEcoVersion',ScratchEcoVersion);
 
 if(localStorage.getItem('ScratchEco1') == null){
