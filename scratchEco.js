@@ -13,6 +13,7 @@ var config = {
   firebase.initializeApp(config);
   fireHere();
   firebase.database.enableLogging(true);
+  doOther();
 }
 
 ScratchEcoVersion = 0.006;
@@ -37,6 +38,7 @@ xhr.send();
 
 document.head.appendChild(temp);
 
+function doOther(){
 var injectAbout = `<div class='btnaboutm'><img src='https://simakyr.github.io/scratchEco/icons/about.png' height='16px'><div><h5>Help</h5><p>You can use for inject image [img]url to image[/img]</p></div></div>
 <style>.btnaboutm{
 height:16px;
@@ -410,4 +412,4 @@ window.onload = function() { carrot=0;runM();setTimeout(fixes,5000); }
 }
 else{
 carrot=0;runM();setTimeout(fixes,5000);
-}
+}}
