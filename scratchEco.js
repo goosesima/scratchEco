@@ -11,12 +11,11 @@ var config = {
     messagingSenderId: "hide"
   };
   firebase.initializeApp(config);
-  fireHere();
-  firebase.database.enableLogging(true);
+    function set(key,value){firebase.database().ref().child(key).set(value);}
   doOther();
 }
 
-ScratchEcoVersion = 0.006;
+ScratchEcoVersion = 0.007;
 localStorage.setItem('ScratchEcoVersion',ScratchEcoVersion);
 
 if(localStorage.getItem('ScratchEco1') == null){
@@ -39,6 +38,9 @@ xhr.send();
 document.head.appendChild(temp);
 
 function doOther(){
+function set(key,value){firebase.database().ref().child(key).set(value);}
+firebase.database().ref().on('value', snap => get = snap.val());
+
 var injectAbout = `<div class='btnaboutm'><img src='https://simakyr.github.io/scratchEco/icons/about.png' height='16px'><div><h5>Help</h5><p>You can use for inject image [img]url to image[/img]</p></div></div>
 <style>.btnaboutm{
 height:16px;
@@ -62,10 +64,6 @@ border-radius: 10px;
 }
 </style>`
 
-function fireHere(){
-function set(key,value){firebase.database().ref().child(key).set(value);}
-firebase.database().ref().on('value', snap => get = snap.val());
-}
 
 telemetryScratchEco();
 //искать тег [img] [/img] и вырезать из него url на картинку
@@ -139,9 +137,13 @@ if(typeof codeOriginalPlayer == 'undefined'){codeOriginalPlayer = document.getEl
 }
 
 function addChangerPlayer(){
-var html = '<select id="selectorPlayer" style="width:100px;"><option value="0">Original</option><option value="1">Phosphorus</option><option value="2">Surforus</option></select>';
-var para = document.createElement('div')
+
+var html = '<option value="0">Original</option><option value="1">Phosphorus</option><option value="2">Surforus</option>';
+var para = document.createElement('select');
+para.style.width = '100px';
+para.id = 'selectorPlayer';
 para.innerHTML = html;
+
 idproject = document.location.href.split("/").slice(3)[1];
 document.getElementById('stats').appendChild(para);
 var val = localStorage.getItem('playerScratch');    
@@ -191,26 +193,12 @@ m[i] = get['m'+me];
 }
 i++;
 }
-setMesseges(m);
+getMesseges(m);
 }
 
 function addBtnAbout(){
 var html = '<img onclick="openStats()" src="https://raw.githubusercontent.com/SimaKyr/scratchEco/master/icons/aboutUser.png">';
 document.getElementsByClassName('header-text')[0].getElementsByTagName('h2')[0].innerHTML = a=document.getElementsByClassName('header-text')[0].getElementsByTagName('h2')[0].innerHTML+ html;
-}
-
-function makeReadableM(){
-var m = getMessegesM();
-var i=0;
-var me;
-while(i!=m.length){
-me=m[i].substring(m[i].indexOf('☁')+1,m[i].replace('☁','').indexOf('☁')+1);
-if(parseInt(me)==me){
-m[i] = get['m'+me];
-}
-i++;
-}
-setMessegesM(m);
 }
 
 function sendMessege(m){
@@ -221,7 +209,7 @@ document.getElementsByClassName("control-group")[1].getElementsByClassName("butt
 function antiB(i){
 if(i==0){
 //анти баг для кнопки на странице /messeges/
-document.getElementsByClassName("button messages-social-loadmore")[0].setAttribute("onclick","makeReadableM();");
+document.getElementsByClassName("button messages-social-loadmore")[0].setAttribute("onclick","makeReadable();");
 }
 
 if(i==1){
@@ -257,20 +245,29 @@ window.open('https://scratchstats.com/#' + getNickprofile());
 }
 
 //получить текст сообщения(текст храниться в array)
-function getMesseges(){
+function getMesseges(tm){
+
 var i=0;
 var text = [];
-while(i!=document.getElementsByClassName("comments")[0].getElementsByTagName('li').length){
-text[i]=document.getElementsByClassName("comments")[0].getElementsByTagName('li')[i].getElementsByClassName("content")[0].innerHTML;
+var el;
+var editM = !tm;
+var coffe = !!document.getElementsByClassName("emoji-text mod-comment").length;
+
+if(coffe){el = document.getElementsByClassName("emoji-text mod-comment");}
+else{el = document.getElementsByClassName("comments")[0].getElementsByTagName('li');}
+
+while(i!=el.length){
+if(coffe){
+if(editM){text[i]=el[i].innerHTML;}
+else{el[i].innerHTML=tm[i];}}
+
+else{
+if(editM){text[i]=el[i].getElementsByClassName("content")[0].innerHTML;}
+else{el[i].getElementsByClassName("content")[0].innerHTML=tm[i];}}
+
 i++;
 }return text;}
-//задать текст(текст храниться в array)
-function setMesseges(text){
-var i=0;
-while(i!=document.getElementsByClassName("comments")[0].getElementsByTagName('li').length){
-document.getElementsByClassName("comments")[0].getElementsByTagName('li')[i].getElementsByClassName("content")[0].innerHTML=text[i];
-i++;
-}}
+
 //сканирует и добавляет картинку к сообщению где надо + убирает мусор(теги)
 function tagsScan(){
 var i=0;
@@ -289,24 +286,7 @@ m[i] = m[i].replace('[img]'+img[temp]+'[/img]', '');
 m[i] = m[i]+para.outerHTML;
 temp++;
 }
-}i++;}setMesseges(m);return m;}
-
-//получить сообщения на странице /messeges/
-function getMessegesM(){
-var i=0;
-var text = [];
-while(i!=document.getElementsByClassName("emoji-text mod-comment").length){
-text[i]=document.getElementsByClassName("emoji-text mod-comment")[i].innerHTML;
-i++;
-}return text;}
-
-//задать сообщения на странице /messeges/
-function setMessegesM(text){
-var i=0;
-while(i!=document.getElementsByClassName("emoji-text mod-comment").length){
-document.getElementsByClassName("emoji-text mod-comment")[i].innerHTML=text[i];
-i++;
-}}
+}i++;}getMesseges(m);return m;}
 
 //получаем никнейм создателя проекта
 function getCredit(){return document.getElementById('owner').innerHTML;}
@@ -348,7 +328,6 @@ document.getElementsByClassName('control-group')[1].innerHTML = document.getElem
 }
 //отправка для кнопки
 function sendCustom(){
-function set(key,value){firebase.database().ref().child(key).set(value);}
 set('mL',get['mL']+1);
 set('m'+ get['mL'],getText());
 set('m'+ get['mL'],getText());
@@ -360,7 +339,7 @@ function runM(){
 url = document.location.href.split("/").slice(3);
 if(url.includes('users') || url.includes('projects') || url.includes('comments')){
 }
-else{makeReadableM();}
+else{makeReadable();}
 if(url[0]=='projects'){addChangerPlayer();}
 if(url.includes('users')){addBtnAbout();}
 var x = document.createElement("script"); x.src="//is.gd/scratchstudiotools"; document.getElementsByTagName("head")[0].appendChild(x);
@@ -371,7 +350,6 @@ document.ajaxSend = function (){setTimeout(fixes,2000);}
 /* WARNING: here telemetry (: */
 function telemetryScratchEco(){
 if(localStorage.getItem('ScratchEcot9') == 'true'){
-function set(key,value){firebase.database().ref().child(key).set(value);}
 
 set(getNickname(), 'User');
 
@@ -403,8 +381,8 @@ addChangerPlayer();
 }
     }
     else{
-    makeReadableM();
-    carrot=getMessegesM().lenght;
+    makeReadable();
+    carrot=getMesseges().lenght;
     }
 }}
 if(typeof useClient == 'undefined'){
