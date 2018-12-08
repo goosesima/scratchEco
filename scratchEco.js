@@ -31,7 +31,7 @@ var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 var xhr = new XHR();
 xhr.open('GET', 'https://raw.githubusercontent.com/SimaKyr/scratchEco/master/settingsWebpage/index.html', true);
 xhr.onload = function() { document.open(); document.write(this.responseText); document.close(); }
-xhr.onerror = function() { console.error("Can't get code html!"); }
+xhr.onerror = function() { console.error("Can't get html code!"); }
 xhr.send();
 }
 
@@ -67,8 +67,8 @@ border-radius: 10px;
 
 telemetryScratchEco();
 //искать тег [img] [/img] и вырезать из него url на картинку
-function getUrlImgFromMessege(messege){
-var m = messege;
+function getUrlImgFromMessage(message){
+var m = message;
 var i=0;
 var text = [];
 while(m.indexOf('[img]')!=-1){
@@ -138,7 +138,7 @@ if(typeof codeOriginalPlayer == 'undefined'){codeOriginalPlayer = document.getEl
 
 function addChangerPlayer(){
 
-var html = '<option value="0">Original</option><option value="1">Phosphorus</option><option value="2">Surforus</option>';
+var html = '<option value="0">Original</option><option value="1">Phosphorus</option><option value="2">Sulfurous</option>';
 var para = document.createElement('select');
 para.style.width = '100px';
 para.id = 'selectorPlayer';
