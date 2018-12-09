@@ -1,2 +1,0 @@
-scratchEco=[];
-scratchEco.useScript=true;
