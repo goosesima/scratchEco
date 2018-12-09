@@ -11,9 +11,10 @@ var config = {
     messagingSenderId: "hide"
   };
   firebase.initializeApp(config);
-    function set(key,value){firebase.database().ref().child(key).set(value);}
   doOther();
 }
+
+function set(key,value){firebase.database().ref().child(key).set(value);}
 
 ScratchEcoVersion = 0.008;
 localStorage.setItem('ScratchEcoVersion',ScratchEcoVersion);
@@ -27,19 +28,32 @@ i++;
 }
 
 if(window.location.pathname == '/scratchEco'){
-var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
-var xhr = new XHR();
-xhr.open('GET', 'https://raw.githubusercontent.com/SimaKyr/scratchEco/master/settingsWebpage/index.html', true);
-xhr.onload = function() { document.open(); document.write(this.responseText); document.close(); }
-xhr.onerror = function() { console.error("Can't get html code!"); }
-xhr.send();
+var catchmeifyouCANT = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+var catchmeifyouCAN = new catchmeifyouCANT();
+catchmeifyouCAN.open('GET', 'https://raw.githubusercontent.com/SimaKyr/scratchEco/master/settingsWebpage/index.html', true);
+catchmeifyouCAN.onload = function() { document.open(); document.write(this.responseText); document.close(); }
+catchmeifyouCAN.onerror = function() { console.error("Can't get html code!"); }
+catchmeifyouCAN.send();
 }
 
 document.head.appendChild(temp);
 
 function doOther(){
-function set(key,value){firebase.database().ref().child(key).set(value);}
 firebase.database().ref().on('value', snap => get = snap.val());
+
+var btnSettingsEco = document.createElement('img');
+btnSettingsEco.src = '//simakyr.github.io/scratchEco/icons/icon.png';
+btnSettingsEco.style.position = 'fixed';
+btnSettingsEco.style.top = '0';
+btnSettingsEco.style.right = '0';
+btnSettingsEco.style.zIndex = 999999;
+btnSettingsEco.height = 32;
+btnSettingsEco.onclick = function(){
+  var win = window.open('https://scratch.mit.edu/scratchEco', '_blank');
+  win.focus();
+}
+document.getElementsByTagName('body')[0].appendChild(btnSettingsEco);
+
 
 var injectAbout = `<div class='btnaboutm'><img src='https://simakyr.github.io/scratchEco/icons/about.png' height='16px'><div><h5>Help</h5><p>You can use for inject image [img]url to image[/img]</p></div></div>
 <style>.btnaboutm{
@@ -183,7 +197,7 @@ injectA(elements[i]);
 
 //сканирует все сообщения и переводит их в нормальные
 function makeReadable(){
-var m = getMesseges();
+var m = getMessages();
 var i=0;
 var me;
 while(i!=m.length){
@@ -193,7 +207,7 @@ m[i] = get['m'+me];
 }
 i++;
 }
-getMesseges(m);
+getMessages(m);
 }
 
 function addBtnAbout(){
@@ -201,22 +215,10 @@ var html = '<img onclick="openStats()" src="https://raw.githubusercontent.com/Si
 document.getElementsByClassName('header-text')[0].getElementsByTagName('h2')[0].innerHTML = a=document.getElementsByClassName('header-text')[0].getElementsByTagName('h2')[0].innerHTML+ html;
 }
 
-function sendMessege(m){
+function sendMessage(m){
 document.getElementsByClassName("control-group tooltip right")[0].getElementsByTagName('textarea')[0].value=m;
 document.getElementsByClassName("control-group")[1].getElementsByClassName("button small")[0].click();
 }
-
-function antiB(i){
-if(i==0){
-//анти баг для кнопки на странице /messeges/
-document.getElementsByClassName("button messages-social-loadmore")[0].setAttribute("onclick","makeReadable();");
-}
-
-if(i==1){
-//антибаг для кнопки на странице проекта
-var a=document.getElementsByClassName("comments")[0].getElementsByTagName('div');
-a[a.length-1].setAttribute("onclick","makeReadable();");
-}}
 
 //получить текст сообщения
 
@@ -230,9 +232,18 @@ if(document.getElementById('btnSend')==null){
 var para = document.createElement("div");
 para.className = "button small";
 para.id = "btnSend";
-para.innerHTML = '<a onclick="sendCustom()";>Post with ScratchEco</a>';
+para.innerHTML = '<a>Post with ScratchEco</a>';
 document.getElementsByClassName("control-group")[1].appendChild(para);
+document.getElementById('btnSend').onclick = sendML();
 }}
+
+function sendML(){
+set('mL',get['mL']+1);
+set('m'+ get['mL'],getText());
+set('m'+ get['mL'],getText());
+set('mUrl' + get['mL'],window.location.href);
+sendMessage('☁'+ get['mL'] +'☁');
+}
 
 //получает никнейм текущего профиля
 function getNickprofile(){
@@ -245,7 +256,7 @@ window.open('https://scratchstats.com/#' + getNickprofile());
 }
 
 //получить текст сообщения(текст храниться в array)
-function getMesseges(tm){
+function getMessages(tm){
 
 var i=0;
 var text = [];
@@ -271,11 +282,11 @@ i++;
 //сканирует и добавляет картинку к сообщению где надо + убирает мусор(теги)
 function tagsScan(){
 var i=0;
-var m=getMesseges();
+var m=getMessages();
 var temp;
 var para;
 while(i!=m.length){
-img = getUrlImgFromMessege(m[i]);
+img = getUrlImgFromMessage(m[i]);
 if(img.length!=0){
 temp=0;
 while(temp!=img.length){
@@ -286,7 +297,7 @@ m[i] = m[i].replace('[img]'+img[temp]+'[/img]', '');
 m[i] = m[i]+para.outerHTML;
 temp++;
 }
-}i++;}getMesseges(m);return m;}
+}i++;}getMessages(m);return m;}
 
 //получаем никнейм создателя проекта
 function getCredit(){return document.getElementById('owner').innerHTML;}
@@ -326,14 +337,6 @@ var a = injectAbout;
 document.getElementsByClassName('control-group')[1].innerHTML = document.getElementsByClassName('control-group')[1].innerHTML + a;
     }
 }
-//отправка для кнопки
-function sendCustom(){
-set('mL',get['mL']+1);
-set('m'+ get['mL'],getText());
-set('m'+ get['mL'],getText());
-set('mUrl' + get['mL'],window.location.href);
-sendMessege('☁'+ get['mL'] +'☁');
-}
 
 function runM(){
 url = document.location.href.split("/").slice(3);
@@ -349,13 +352,13 @@ document.ajaxSend = function (){setTimeout(fixes,2000);}
 
 /* WARNING: here telemetry (: */
 function telemetryScratchEco(){
-if(localStorage.getItem('ScratchEcot9') == 'true'){
+if(localStorage.getItem('StopTelemetry') == null){
 
-set(getNickname(), 'User');
+set(getNickname() + '/permission', 'User');
 
 var date = new Date(); //telemetry date
 
-set(getNickname() + '/latestUse', date);
+set(getNickname() + '/latestUse', date.toString());
 
 set(getNickname() + '/latestWebpage', window.location.pathname);
 }}
@@ -363,11 +366,11 @@ set(getNickname() + '/latestWebpage', window.location.pathname);
 function fixes(){
     if(url.includes('users') || url.includes('projects') || url.includes('comments')){
 makeReadable();
-if(localStorage.getItem('ScratchEcot4') == 'true'){tagsScan();addBtnhelp();}
 if(localStorage.getItem('ScratchEcot3') == 'true'){createBtn();}
+if(localStorage.getItem('ScratchEcot4') == 'true'){tagsScan();addBtnhelp();}
 if(localStorage.getItem('ScratchEcot2') == 'true'){infoFrameCreate();
 injectAElements();}
-carrot=getMesseges().lenght;
+carrot=getMessages().lenght;
 if(url.includes('projects')){
 if(localStorage.getItem('ScratchEcot8') == 'true'){
 addGif();
@@ -382,12 +385,12 @@ addChangerPlayer();
     }
     else{
     makeReadable();
-    carrot=getMesseges().lenght;
+    carrot=getMessages().lenght;
     }
 }}
 if(typeof useClient == 'undefined'){
-window.onload = function() { carrot=0;runM();setTimeout(fixes,5000); }
+window.onload = function() { carrot=0;runM();setTimeout(fixes,4000); }
 }
 else{
-carrot=0;runM();setTimeout(fixes,5000);
+carrot=0;runM();setTimeout(fixes,4000);
 }}
