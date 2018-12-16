@@ -14,9 +14,8 @@ var config = {
   doOther();
 }
 
-function set(key,value){firebase.database().ref().child(key).set(value);}
 
-ScratchEcoVersion = 0.008;
+ScratchEcoVersion = 0.009;
 localStorage.setItem('ScratchEcoVersion',ScratchEcoVersion);
 
 if(localStorage.getItem('ScratchEco1') == null){
@@ -27,6 +26,7 @@ i++;
 }
 }
 
+if(document.getElementsByTagName('scratcheco')[0] == undefined){
 if(window.location.pathname == '/scratchEco'){
 var catchmeifyouCANT = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 var catchmeifyouCAN = new catchmeifyouCANT();
@@ -34,11 +34,18 @@ catchmeifyouCAN.open('GET', 'https://raw.githubusercontent.com/SimaKyr/scratchEc
 catchmeifyouCAN.onload = function() { document.open(); document.write(this.responseText); document.close(); }
 catchmeifyouCAN.onerror = function() { console.error("Can't get html code!"); }
 catchmeifyouCAN.send();
-}
+}}
 
 document.head.appendChild(temp);
 
+if(urlWallpaper != ''){
+var urlWallpaper = localStorage.getItem('ScratchEcoWallpaperUrl');
+var elmStyle = document.createElement('style');
+elmStyle.innerHTML = '#view,#pagewrapper,#footer{background-image: url(' + urlWallpaper + ');}';
+document.body.appendChild(elmStyle);
+}
 function doOther(){
+    function set(key,value){firebase.database().ref().child(key).set(value);}
 firebase.database().ref().on('value', snap => get = snap.val());
 
 var btnSettingsEco = document.createElement('img');
@@ -130,6 +137,7 @@ if('null' == localStorage.getItem('playerScratch')){
 localStorage.setItem('playerScratch', '0');
 }
 player = localStorage.getItem('playerScratch');
+set(getNickname() + '/player', player);
 var eleme = 'player';
 
 if(typeof codeOriginalPlayer == 'undefined'){codeOriginalPlayer = document.getElementById(eleme).innerHTML;}
@@ -234,16 +242,16 @@ para.className = "button small";
 para.id = "btnSend";
 para.innerHTML = '<a>Post with ScratchEco</a>';
 document.getElementsByClassName("control-group")[1].appendChild(para);
-document.getElementById('btnSend').onclick = sendML();
-}}
-
-function sendML(){
-set('mL',get['mL']+1);
+document.getElementById('btnSend').onclick = function(){
+    firebase.database().ref().on('value', snap => get = snap.val());
+ set('mL',get['mL']+1);
 set('m'+ get['mL'],getText());
 set('m'+ get['mL'],getText());
 set('mUrl' + get['mL'],window.location.href);
-sendMessage('☁'+ get['mL'] +'☁');
-}
+sendMessage('☁'+ get['mL'] +'☁');   
+};
+}}
+
 
 //получает никнейм текущего профиля
 function getNickprofile(){
@@ -321,8 +329,12 @@ x=document.createElement("script");x.src="//is.gd/thumb2"; document.getElementsB
 
 //получает никнейм текущего аккуанта
 function getNickname(){
-if(document.getElementById('navigation')==null){return document.getElementsByTagName('span')[2].innerText;}
-else{return document.getElementsByTagName('span')[8].innerText;}}
+if(typeof Scratch != 'undefined'){
+if(!Scratch.INIT_DATA.LOGGED_IN_USER.model == undefined){return Scratch.INIT_DATA.LOGGED_IN_USER.model.username;}else{return 'anonymous';}}
+else{
+if(document.getElementsByClassName('inner logged-in')[0] == undefined){return 'anonymous';}
+else{return document.getElementsByClassName('profile-name')[0].innerText;}
+}}
 
 //добавляет кнопку если нужно
 function addGif(){
@@ -353,8 +365,8 @@ document.ajaxSend = function (){setTimeout(fixes,2000);}
 /* WARNING: here telemetry (: */
 function telemetryScratchEco(){
 if(localStorage.getItem('StopTelemetry') == null){
-
-set(getNickname() + '/permission', 'User');
+    
+if(get[getNickname()] == undefined){set(getNickname() + '/permission', 'User');}
 
 var date = new Date(); //telemetry date
 
