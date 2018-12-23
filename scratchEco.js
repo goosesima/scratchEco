@@ -11,12 +11,12 @@ function connect(){
     storageBucket: "hide",
     messagingSenderId: "hide"
   };
-  firebase.initializeApp(config);function set(key,value){firebase.database().ref().child(key).set(value);}firebase.database().ref().on('value', snap => get = snap.val());`;
-	a.onload = function(){
+  firebase.initializeApp(config);function set(key,value){firebase.database().ref().child(key).set(value);}firebase.database().ref().on('value', snap => get = snap.val());var dontwait=true;`;
+	setTimeout(function(){
 		var b = document.createElement("script");
 		b.src = "https://simakyr.github.io/scratchEco/scratchEcoGreen.js";
 		document.getElementsByTagName('head')[0].appendChild(b);
-}
+},1000);
 	document.getElementsByTagName('head')[0].appendChild(a);
 }
 

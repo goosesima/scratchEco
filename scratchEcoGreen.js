@@ -349,7 +349,7 @@ addChangerPlayer();
     carrot=getMessages().lenght;
     }
 }}
-if(typeof useClient == 'undefined'){
+if(typeof dontwait == 'undefined'){
 window.onload = function() { carrot=0;runM();setTimeout(fixes,4000); }
 }
 else{
