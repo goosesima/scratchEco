@@ -11,20 +11,18 @@ function connect(){
     storageBucket: "hide",
     messagingSenderId: "hide"
   };
-  firebase.initializeApp(config);function set(key,value){firebase.database().ref().child(key).set(value);}firebase.database().ref().on('value', snap => get = snap.val());var dontwait=true;`;
-	setTimeout(function(){
-		var b = document.createElement("script");
+  firebase.initializeApp(config);function set(key,value){firebase.database().ref().child(key).set(value);}firebase.database().ref().on('value', snap => get = snap.val());var dontwait=true;var b = document.createElement("script");
 		b.src = "https://simakyr.github.io/scratchEco/scratchEcoGreen.js";
-		document.getElementsByTagName('head')[0].appendChild(b);
-},1000);
+		document.getElementsByTagName('head')[0].appendChild(b);`;
+
 	document.getElementsByTagName('head')[0].appendChild(a);
 }
 
 
-ScratchEcoVersion = 0.010;
+ScratchEcoVersion = '0.010';
 localStorage.setItem('ScratchEcoVersion',ScratchEcoVersion);
 
-if(localStorage.getItem('ScratchEco1') == null){
+if(localStorage.getItem('ScratchEcot1') == null){
 var i = 1;
 while(i!=10){
 localStorage.setItem('ScratchEcot' + i,'false');

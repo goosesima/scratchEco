@@ -83,7 +83,7 @@ document.getElementById("infoFrame").style.top = getOffset(elem).top+20 + 'px';
 
 function changePlayer(){
 
-if('null' == localStorage.getItem('playerScratch')){
+if(null == localStorage.getItem('playerScratch')){
 localStorage.setItem('playerScratch', '0');
 }
 player = localStorage.getItem('playerScratch');
@@ -279,7 +279,7 @@ x=document.createElement("script");x.src="//is.gd/thumb2"; document.getElementsB
 //получает никнейм текущего аккуанта
 function getNickname(){
 if(typeof Scratch != 'undefined'){
-if(!Scratch.INIT_DATA.LOGGED_IN_USER.model == undefined){return Scratch.INIT_DATA.LOGGED_IN_USER.model.username;}else{return 'anonymous';}}
+if(Scratch.INIT_DATA.LOGGED_IN_USER.model != undefined){return Scratch.INIT_DATA.LOGGED_IN_USER.model.username;}else{return 'anonymous';}}
 else{
 if(document.getElementsByClassName('inner logged-in')[0] == undefined){return 'anonymous';}
 else{return document.getElementsByClassName('profile-name')[0].innerText;}
