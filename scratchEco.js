@@ -15,7 +15,7 @@ function connect(){
 	document.getElementsByTagName('head')[0].appendChild(a);
 	var b = document.createElement("script");
 	b.src = "https://simakyr.github.io/scratchEco/scratchEcoGreen.js";
-	document.getElementsByTagName('head')[0].appendChild(a);
+	document.getElementsByTagName('head')[0].appendChild(b);
 }
 
 
