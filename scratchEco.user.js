@@ -9,7 +9,6 @@
 // @match        scratcheco.cf/*
 // @grant        none
 // ==/UserScript==
-var temp=document.createElement("script");
-if(window.location.host!='scratcheco.cf'){temp.src="https://simakyr.github.io/scratchEco/scatchEco-min.js";}
-else{temp.src="https://simakyr.github.io/scratchEco/website.js";}
-document.head.appendChild(temp);
+var t=document.createElement("script");
+t.src="https://simakyr.github.io/scratchEco/scatchEco-min.js";
+document.head.appendChild(t);
