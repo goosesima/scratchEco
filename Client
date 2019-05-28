@@ -1,1 +1,0 @@
-javascript:useClient=true;x=document.createElement('script');x.src='//simakyr.github.io/scratchEco/scratchEco.user.js'; document.getElementsByTagName('head')[0].appendChild(x);
