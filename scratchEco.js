@@ -145,14 +145,14 @@ var para = document.createElement("div");
 para.className = "button small";
 para.id = "btnSend";
 para.innerHTML = '<a>Post with ScratchEco</a>';
-document.getElementsByClassName("control-group")[1].appendChild(para);
-document.getElementById('btnSend').onclick = function(){
- set('mL',get['mL']+1);
+para.onclick = function(){
+set('mL',get['mL']+1);
 set('m'+ get['mL'],getText());
 set('m'+ get['mL'],getText());
 set('mUrl' + get['mL'],window.location.href);
 sendMessage('☁'+ get['mL'] +'☁');
 };
+document.getElementsByClassName("control-group")[1].appendChild(para);
 }}
 
 
@@ -176,7 +176,7 @@ var editM = !tm;
 var coffe = !!document.getElementsByClassName("emoji-text mod-comment").length;
 
 if(coffe){el = document.getElementsByClassName("emoji-text mod-comment");}
-else{el = document.getElementsByClassName("comments")[0].getElementsByTagName('li');}
+else{el = document.getElementsByClassName("emoji-text");}
 
 while(i!=el.length){
 if(coffe){
@@ -184,9 +184,14 @@ if(editM){text[i]=el[i].innerHTML;}
 else{el[i].innerHTML=tm[i];}}
 
 else{
-if(editM){text[i]=el[i].getElementsByClassName("content")[0].innerHTML;}
-else{el[i].getElementsByClassName("content")[0].innerHTML=tm[i];}}
-
+    try {
+      if(editM){text[i]=el[i].getElementsByClassName("content")[0].innerHTML;}
+      else{el[i].getElementsByClassName("content")[0].innerHTML=tm[i];}
+  }catch{
+    if(editM){text[i]=el[i].innerHTML;}
+    else{el[i].innerHTML=tm[i];}
+  }
+}
 i++;
 }return text;}
 
@@ -304,3 +309,6 @@ else{
 }}}
 
 runM();
+if(url.includes('users') || url.includes('projects') || url.includes('comments')){
+setTimeout(makeReadable,2000);
+}
