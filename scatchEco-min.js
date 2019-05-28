@@ -1,8 +1,20 @@
+var versionOfFirebase = '6.0.4';
+
 var temp = document.createElement("script");
-temp.src = "https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js";
-temp.onload = function(){ connect(); }
+temp.src = "https://www.gstatic.com/firebasejs/" + versionOfFirebase + "/firebase-app.js";
+temp.onload = function(){
+  var temp = document.createElement("script");
+  temp.src = "https://www.gstatic.com/firebasejs/" + + "/firebase-database.js";
+  temp.onload = function(){ connect(); }
+}
 
 document.head.appendChild(temp);
+
+window.loadScratchEco = function(){
+  loadScratchEco = function(){};
+  document.getElementsByTagName('head')[0].appendChild(scriptScratchEco);
+  delete scriptScratchEco;
+}
 
 function connect(){
   var firebaseConfig = {
@@ -16,10 +28,8 @@ function connect(){
   };
   firebase.initializeApp(firebaseConfig);
   function set(key,value){firebase.database().ref().child(key).set(value);}
-  firebase.database().ref().on('value', snap => { get = snap.val(); load(); });
+  firebase.database().ref().on('value', snap => { get = snap.val(); window.loadScratchEco(); });
 	document.head.appendChild(a);
-  document.getElementsByTagName('head')[0].appendChild(scriptScratchEco);
-  delete scriptScratchEco;
 }
 if(window.location.host!='scratcheco.cf'){
   window.scriptScratchEco = document.createElement("script");
@@ -49,9 +59,9 @@ if(document.getElementsByTagName('scratcheco')[0] == undefined){
   }
 }
 
+var urlWallpaper = localStorage.getItem('ScratchEcoWallpaperUrl');
 
-if(urlWallpaper != ''){
-  var urlWallpaper = localStorage.getItem('ScratchEcoWallpaperUrl');
+if(urlWallpaper != ''||urlWallpaper != null){
   var elmStyle = document.createElement('style');
   elmStyle.innerHTML = '#view,#pagewrapper,#footer{background-image: url(' + urlWallpaper + ');}';
   document.body.appendChild(elmStyle);
