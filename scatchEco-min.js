@@ -5,8 +5,7 @@ temp.onload = function(){ connect(); }
 document.head.appendChild(temp);
 
 function connect(){
-	var a = document.createElement("script");
-	a.innerHTML = `var firebaseConfig = {
+  var firebaseConfig = {
     apiKey: "AIzaSyAy2o-FZGQDiy8orFTCTmJ7b3coUeQaoCc",
     authDomain: "scratcheco-105a5.firebaseapp.com",
     databaseURL: "https://scratcheco-105a5.firebaseio.com",
@@ -15,7 +14,7 @@ function connect(){
     messagingSenderId: "17817429622",
     appId: "1:17817429622:web:a9ad1c6610e52a0f"
   };
-  firebase.initializeApp(config);
+  firebase.initializeApp(firebaseConfig);
   function set(key,value){firebase.database().ref().child(key).set(value);}
   firebase.database().ref().on('value', snap => { get = snap.val(); load(); });
 	document.head.appendChild(a);
