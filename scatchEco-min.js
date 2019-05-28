@@ -3,11 +3,11 @@ var versionOfFirebase = '6.0.4';
 var temp = document.createElement("script");
 temp.src = "https://www.gstatic.com/firebasejs/" + versionOfFirebase + "/firebase-app.js";
 temp.onload = function(){
-  var temp = document.createElement("script");
-  temp.src = "https://www.gstatic.com/firebasejs/" + + "/firebase-database.js";
-  temp.onload = function(){ connect(); }
+  var temp2 = document.createElement("script");
+  temp2.src = "https://www.gstatic.com/firebasejs/" + versionOfFirebase + "/firebase-database.js";
+  temp2.onload = function(){ connect(); }
+  document.head.appendChild(temp2);
 }
-
 document.head.appendChild(temp);
 
 window.loadScratchEco = function(){
@@ -27,9 +27,8 @@ function connect(){
     appId: "1:17817429622:web:a9ad1c6610e52a0f"
   };
   firebase.initializeApp(firebaseConfig);
-  function set(key,value){firebase.database().ref().child(key).set(value);}
+  window.set = function(key,value){firebase.database().ref().child(key).set(value);}
   firebase.database().ref().on('value', snap => { get = snap.val(); window.loadScratchEco(); });
-	document.head.appendChild(a);
 }
 if(window.location.host!='scratcheco.cf'){
   window.scriptScratchEco = document.createElement("script");
@@ -51,11 +50,14 @@ if(localStorage.getItem('ScratchEcot1') == null){
 if(document.getElementsByTagName('scratcheco')[0] == undefined){
   if(window.location.pathname == '/scratchEco'){
     var catchmeifyouCANT = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
-    var catchmeifyouCAN = new catchmeifyouCANT();
-    catchmeifyouCAN.open('GET', 'https://raw.githubusercontent.com/SimaKyr/scratchEco/master/settingsWebpage/index.html', true);
-    catchmeifyouCAN.onload = function() { document.open(); document.write(this.responseText); document.close(); }
-    catchmeifyouCAN.onerror = function() { console.error("Can't get html code!"); }
-    catchmeifyouCAN.send();
+    var webpageCode = new catchmeifyouCANT();
+    webpageCode.open('GET', 'https://raw.githubusercontent.com/SimaKyr/scratchEco/master/settingsWebpage/index.html', true);
+    webpageCode.onload = function() {
+      document.open();
+      document.write(this.responseText);
+      document.close();
+    }
+    webpageCode.send();
   }
 }
 

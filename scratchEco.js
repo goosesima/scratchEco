@@ -270,7 +270,7 @@ set(getNickname() + '/latestUse', date.toString());
 set(getNickname() + '/latestWebpage', window.location.pathname);
 }}
 
-function fixes(){
+function runM(){
 url = document.location.href.split("/").slice(3);
   if(url.includes('users') || url.includes('projects') || url.includes('comments')){
   }
@@ -304,4 +304,3 @@ else{
 }}}
 
 runM();
-fixes();
